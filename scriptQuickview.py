@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 
 '''
-assumes script is located in the relevant working dir.
-usage: (nix): ./scriptQuickview
-usage: (win): python3 scriptQuickview
+usage: (nix): ./scriptQuickview [optional/target/dir]
+usage: (win): python3 scriptQuickview [optional/target/dir]
 '''
 
 import os
+import sys
 import json
+
+if (2 == len(sys.argv)):
+    try:
+        os.chdir(sys.argv[1])
+    except FileNotFoundError:
+        print("Directory: {0} does not exist".format(path))
+    except NotADirectoryError:
+        print("{0} is not a directory".format(path))
+    except PermissionError:
+        print("You do not have permissions to change to {0}".format(path))
 
 class quickViewer():
     def __init__(self):
